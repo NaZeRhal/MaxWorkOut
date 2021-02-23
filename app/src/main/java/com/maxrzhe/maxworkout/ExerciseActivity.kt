@@ -1,5 +1,6 @@
 package com.maxrzhe.maxworkout
 
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maxrzhe.maxworkout.adapter.ExerciseStatusAdapter
 import com.maxrzhe.maxworkout.databinding.ActivityExerciseBinding
+import com.maxrzhe.maxworkout.databinding.DialogConfirmBackBinding
 import java.util.*
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
@@ -41,6 +43,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.tbExercise.setNavigationOnClickListener {
+//            showCustomBackDialog
             onBackPressed()
         }
 
@@ -169,4 +172,21 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             Log.e("TTS", "onInit: Initialisation failed!")
         }
     }
+
+//    private fun showCustomBackDialog() {
+//        val customDialog = Dialog(this)
+//        val dialogBinding = DialogConfirmBackBinding.inflate(layoutInflater)
+//        customDialog.setContentView(dialogBinding.root)
+//        dialogBinding.tvYes.setOnClickListener {
+//            finish()
+//            customDialog.dismiss()
+//        }
+//
+//        dialogBinding.tvNo.setOnClickListener {
+//            customDialog.dismiss()
+//        }
+//
+//        customDialog.show()
+//
+//    }
 }
