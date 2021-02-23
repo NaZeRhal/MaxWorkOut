@@ -1,12 +1,12 @@
 package com.maxrzhe.maxworkout
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +22,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = -1
+    private val restTime: Long = 2000
+    private val exerciseTime: Long = 3000
 
     private var tts: TextToSpeech? = null
     private var player: MediaPlayer? = null
@@ -67,7 +69,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setRestProgressBar() {
-        restTimer = object : CountDownTimer(10000, 1000) {
+        restTimer = object : CountDownTimer(restTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
                 binding.pbRest.progress = (millisUntilFinished / 1000).toInt()
@@ -105,7 +107,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setExerciseProgressBar() {
-        exerciseTimer = object : CountDownTimer(30000, 1000) {
+        exerciseTimer = object : CountDownTimer(exerciseTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 binding.pbExercise.progress = (millisUntilFinished / 1000).toInt()
                 binding.tvTimerExercise.text = (millisUntilFinished / 1000).toString()
@@ -118,11 +120,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     adapter!!.notifyItemChanged(currentExercisePosition)
                     setupRestView()
                 } else {
-                    Toast.makeText(
-                        this@ExerciseActivity,
-                        "Congratulations!!!!!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    finish()
+                    startActivity(Intent(this@ExerciseActivity, FinishActivity::class.java))
                 }
             }
         }
