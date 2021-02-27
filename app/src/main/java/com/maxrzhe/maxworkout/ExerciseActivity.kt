@@ -43,8 +43,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.tbExercise.setNavigationOnClickListener {
-//            showCustomBackDialog
-            onBackPressed()
+            showCustomBackDialog()
+//            onBackPressed()
         }
 
         exerciseList = Constants.defaultExerciseList()
@@ -173,20 +173,20 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-//    private fun showCustomBackDialog() {
-//        val customDialog = Dialog(this)
-//        val dialogBinding = DialogConfirmBackBinding.inflate(layoutInflater)
-//        customDialog.setContentView(dialogBinding.root)
-//        dialogBinding.tvYes.setOnClickListener {
-//            finish()
-//            customDialog.dismiss()
-//        }
-//
-//        dialogBinding.tvNo.setOnClickListener {
-//            customDialog.dismiss()
-//        }
-//
-//        customDialog.show()
-//
-//    }
+    private fun showCustomBackDialog() {
+        val customDialog = Dialog(this)
+        val dialogBinding = DialogConfirmBackBinding.inflate(layoutInflater)
+        customDialog.setContentView(dialogBinding.root)
+        dialogBinding.tvYes.setOnClickListener {
+            finish()
+            customDialog.dismiss()
+        }
+
+        dialogBinding.tvNo.setOnClickListener {
+            customDialog.dismiss()
+        }
+
+        customDialog.show()
+
+    }
 }
